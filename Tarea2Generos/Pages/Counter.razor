@@ -40,30 +40,46 @@
 </div>
 
 @code {
-    private int currentCount = 0;
-
-    private void IncrementCount()
-    {
-        currentCount++;
-    }
-
+   
 
     Generos generos = new Generos();
+
+
+
+    private void Limpiar()
+    {
+        generos = new Generos();
+        generos.Nombre = string.Empty;
+        generos.Categoria = string.Empty;
+        generos.Duracion = 0;
+    }
+  
+
+
 
     private void Guardar()
     {
         RepositorioBase<Generos> db = new RepositorioBase<Generos>();
 
 
-        try
+
+        try             
         {
+           
+
+       if(string.IsNullOrEmpty(generos.Nombre))
+        {
+            return;
+        }
+       if(string.IsNullOrEmpty(generos.Categoria))
+        {
+            return;
+        }
+          
 
             if (db.Insert(generos))
             {
-                generos = new Generos();
-                generos.Nombre = string.Empty;
-                generos.Categoria = string.Empty;
-                generos.Duracion = 0;
+                Limpiar();
 
             }
 
