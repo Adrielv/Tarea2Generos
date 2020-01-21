@@ -1,4 +1,4 @@
-﻿@page "/counter"
+﻿@page "/Counter"
 
 @using Tarea2Generos.BLL;
 @using Tarea2Generos.Entidades;
@@ -33,14 +33,16 @@
 <br />
 
 <div class="form-group">
-    
-    <button type="button" class="col-md-offset-1 btn btn-success" @onclick="Guardar">Guardar</button>
-   
+
+    <button type="button" class="col-md-offset-2 btn btn-primary" @onclick="Nuevo">Nuevo</button>
+
+    <button type="button" class="col-md-offset-2 btn btn-success" @onclick="Guardar">Guardar</button>
+
 
 </div>
 
 @code {
-   
+
 
     Generos generos = new Generos();
 
@@ -53,8 +55,13 @@
         generos.Categoria = string.Empty;
         generos.Duracion = 0;
     }
-  
 
+
+
+    private void Nuevo()
+    {
+        Limpiar();
+    }
 
 
     private void Guardar()
@@ -63,19 +70,19 @@
 
 
 
-        try             
+        try
         {
-           
 
-       if(string.IsNullOrEmpty(generos.Nombre))
-        {
-            return;
-        }
-       if(string.IsNullOrEmpty(generos.Categoria))
-        {
-            return;
-        }
-          
+
+            if(string.IsNullOrEmpty(generos.Nombre))
+            {
+                return;
+            }
+            if(string.IsNullOrEmpty(generos.Categoria))
+            {
+                return;
+            }
+
 
             if (db.Insert(generos))
             {
