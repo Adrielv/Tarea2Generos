@@ -1,0 +1,81 @@
+﻿@page "/counter"
+
+@using Tarea2Generos.BLL;
+@using Tarea2Generos.Entidades;
+
+
+
+<h1>Registro Generos</h1>
+<br />
+
+<div class="container">
+
+
+    <label for="Nombre" class="col-md-2 col-form-label">Nombre</label>
+    <input type="text" id="Nombre" class="form-check" @bind="generos.Nombre" />
+
+</div>
+<div class="container">
+
+
+    <label for="Categoria" class="col-md-2 col-form-label">Categoria</label>
+    <input type="text" id="Categoria" class="form-check" @bind="generos.Categoria" />
+
+</div>
+<div class="container">
+
+
+    <label for="Duracion" class="col-md-2 col-form-label">Duracion</label>
+    <input type="text" id="Duracion" class="form-check" @bind="generos.Duracion" />
+
+</div>
+
+<br />
+
+<div class="form-group">
+    
+    <button type="button" class="col-md-offset-1 btn btn-success" @onclick="Guardar">Guardar</button>
+   
+
+</div>
+
+@code {
+    private int currentCount = 0;
+
+    private void IncrementCount()
+    {
+        currentCount++;
+    }
+
+
+    Generos generos = new Generos();
+
+    private void Guardar()
+    {
+        RepositorioBase<Generos> db = new RepositorioBase<Generos>();
+
+
+        try
+        {
+
+            if (db.Insert(generos))
+            {
+                generos = new Generos();
+                generos.Nombre = string.Empty;
+                generos.Categoria = string.Empty;
+                generos.Duracion = 0;
+
+            }
+
+
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+    }
+
+
+
+
+}
